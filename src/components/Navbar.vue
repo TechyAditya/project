@@ -1,0 +1,88 @@
+<template>
+	<header>
+	<nav class="navbar navbar-expand-md sticky-top border-bottom bg-light shadow bg-body rounded">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#" style="max-width: 6%;">
+				<img src="../assets/logo.png" class="img-fluid">
+			 </a>
+			<a class="navbar-brand d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-1 text-primary" href="#">{{ name }}</a>
+			<button class="navbar-toggler collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span> </span><span> </span><span> </span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
+				<div class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+					<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+					<button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#courses" type="button" role="tab" aria-controls="courses" aria-selected="false">Courses</button>
+					<button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#success" type="button" role="tab" aria-controls="success" aria-selected="false">Our Success</button>
+					<button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false">About Us</button>
+					<button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact Us</button>       
+				</div>
+				<div class="col-md-3 text-end">
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-outline-success mx-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
+					<button type="button" class="btn btn-success">Register</button>
+				</div>
+			</div>
+		</div>
+	</nav>
+	</header>
+</template>
+
+<script>
+	// import { RouterLink, RouterView } from 'vue-router'
+	export default {
+		props:[
+			'name'
+		]
+	}
+</script>
+
+<style>
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+	color: #fff !important;
+	background-color: #198754 !important;
+}
+.nav-link:not(.active):hover {
+	transform: scale(1.2);
+	color: #198754 !important;
+} 
+.nav-link {
+	color: #777777 !important;
+}
+.navbar-toggler:focus,
+.navbar-toggler:active { outline: none }
+.navbar-toggler span {
+    display: block;
+    background-color: #444;
+    height: 3px;
+    width: 25px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    transform: rotate(0deg);
+    position: relative;
+    left: 0;
+    opacity: 1;
+}.navbar-toggler span:nth-child(1),
+.navbar-toggler span:nth-child(3) {
+    transition: transform 300ms linear;
+}
+.navbar-toggler:not(.collapsed) span:nth-child(1) {
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    transform: rotate(45deg);
+    opacity: 0.9;
+}
+.navbar-toggler:not(.collapsed) span:nth-child(2) {
+    height: 12px;
+    visibility: hidden;
+    background-color: transparent;
+}
+.navbar-toggler:not(.collapsed) span:nth-child(3) {
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    transform: rotate(-45deg);
+    opacity: 0.9;
+}
+</style>
