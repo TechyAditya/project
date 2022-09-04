@@ -5,7 +5,7 @@
 			<a class="navbar-brand" href="#" style="max-width: 6%;">
 				<img src="../assets/logo.png" class="img-fluid">
 			 </a>
-			<a class="navbar-brand d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-1 text-primary" href="#">{{ name }}</a>
+			<a class="navbar-brand d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-1 text-primary" href="#" @click="this.$router.push('/')">{{ name }}</a>
 			<b-button class="navbar-toggler collapsed position-relative" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span> </span><span> </span><span> </span>
 			</b-button>
