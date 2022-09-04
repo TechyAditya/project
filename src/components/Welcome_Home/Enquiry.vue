@@ -34,7 +34,7 @@
                 <textarea class="form-control" id="message" rows="5"></textarea>
             </div><br>
             <div class="col-lg-12 d-flex justify-content-center">
-                <button class="my-2 btn btn-success">Submit</button>
+                <b-button variant="success my-2">Submit</b-button>
             </div>
         </form>
     </div>

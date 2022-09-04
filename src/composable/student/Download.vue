@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-center mx-md-5 my-md-3 py-md-3">
+  <div class="row justify-content-center mx-md-5 my-3 py-md-3">
 				<div class="col-md-4">
 					<div class="card" style="width: 18rem;">
 						<div class="card-body">
@@ -29,7 +29,7 @@
 					  </div>
 				</div>
 			</div>
-			<div class="row justify-content-center mx-md-5 my-md-3 py-md-3">
+			<div class="row justify-content-center mx-md-5 my-3 py-md-3">
 				<div class="col-md-4">
 					<div class="card" style="width: 18rem;">
 						<div class="card-body">
@@ -59,7 +59,7 @@
 					  </div>
 				</div>
 			</div>
-			<div class="row justify-content-center mx-md-5 my-md-3 py-md-3">
+			<div class="row justify-content-center mx-md-5 my-3 py-md-3">
 				<div class="col-md-4">
 					<div class="card" style="width: 18rem;">
 						<div class="card-body">

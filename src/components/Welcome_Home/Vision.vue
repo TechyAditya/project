@@ -22,7 +22,7 @@
         <p>Individual attention and performance analysis are the key factors to our success. Of course, we have other secret ingredients as well!</p>
     </div>
     <div class="col-lg-12 d-flex justify-content-center">
-        <button class="my-3 btn btn-success">Register Now</button>
+        <b-button variant="success my-3">Register Now</b-button>
     </div>
 </div>
 

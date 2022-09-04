@@ -1,55 +1,49 @@
 <template>
   <!-- Modal -->
-	<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel">Log In</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<input id="username" class="form-control form-control-lg d-flex mx-auto" placeholder="Enter Username" required>
-						<input id="password" class="form-control form-control-lg d-flex mx-auto mt-2" placeholder="Enter Password" required>
-						<div id="Remember" class="d-flex mx-auto mt-2">
-							<input class="form-check-input" type="checkbox" value="" id="remme">
-							<label class="form-check-label" for="remme"> Remember Me</label><br>
-						</div>
-						<div id="Las" class="d-flex mx-auto mt-2">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="signInAs" id="student" value="Student">
-								<label class="form-check-label" for="student">student</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="signInAs" id="teacher" value="Teacher">
-								<label class="form-check-label" for="teacher">teacher</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="signInAs" id="admin" value="Admin">
-								<label class="form-check-label" for="admin">admin</label>
-							</div>
-						</div>
-						<button class="btn btn-primary btn-lg d-flex mx-auto mt-2 btn-success" type="button" @click="handleclick()">Login</button>
-					</form>
-				</div>
-				<!-- <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Understood</button>
-				</div> -->
+	<b-modal id="loginForm" title="Login" aria-labelledby="loginForm" aria-hidden="true" :hide-footer="true">
+		<form ref="form">
+			<b-form-input id="username" v-model="username" class="form-control form-control-lg d-flex mx-auto" placeholder="Enter Username" required trim></b-form-input>
+			<b-form-input id="password" v-model="password" class="form-control form-control-lg d-flex mx-auto" placeholder="Enter Password" required></b-form-input>
+			<!-- <div id="Remember" class="d-flex mx-auto mt-2">
+				<input class="form-check-input" type="checkbox" value="" id="remme">
+				<label class="form-check-label" for="remme"> Remember Me</label><br>
+			</div> -->
+			<div>
+				<b-form-radio-group v-model="selected" :options="options" class="mb-3" value-field="item" text-field="name"></b-form-radio-group>
+				<div class="mt-3">Login As : <strong>{{ selected }}</strong></div>
 			</div>
-		</div>
-	</div>
-
+			<b-button variant="success d-flex mx-auto mt-2" size="lg" type="button" @click="handleSubmit()" data-bs-dismiss="modal">Login</b-button>
+		</form>
+	</b-modal>
 </template>
 
 <script>
 export default {
+    // computed: {
+	// 	state() {
+	// 		return this.username.length <= 0
+	// 	},
+	// 	// invalidFeedback() {
+	// 	// 	if (this.name.length > 0)
+	// 	// 		return 'Enter at least 4 characters.'
+	// 	// 	return 'Please enter something.'
+	// 	// }
+    // },
+	data() {
+		return {
+			selected: '',
+			options: [
+				{ item: 'Student', name: 'Student' },
+				{ item: 'Teacher', name: 'Teacher' },
+				{ item: 'Admin', name: 'Admin' },
+			]
+		}
+    },
 	methods: {
-		handleclick() {
-			var signInAs = document.querySelector('input[name="signInAs"]:checked').value
-			console.log(signInAs)
+		handleSubmit() {
+			const pathName = this.selected
 			this.$router.push({
-				name: signInAs,
+				name: pathName,
 				params: {
 					id : '00'
 				}

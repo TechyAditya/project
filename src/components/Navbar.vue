@@ -6,39 +6,39 @@
 				<img src="../assets/logo.png" class="img-fluid">
 			 </a>
 			<a class="navbar-brand d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-1 text-primary" href="#">{{ name }}</a>
-			<button class="navbar-toggler collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<b-button class="navbar-toggler collapsed position-relative" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span> </span><span> </span><span> </span>
-			</button>
+			</b-button>
 			<div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
 				<div class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0" v-if="isLoggedIn()">
-					<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-					<button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#courses" type="button" role="tab" aria-controls="courses" aria-selected="false">Courses</button>
-					<button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#success" type="button" role="tab" aria-controls="success" aria-selected="false">Our Success</button>
-					<button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false">About Us</button>
-					<button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact Us</button> 
+					<b-button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" role="tab" aria-controls="home" aria-selected="true">Home</b-button>
+					<b-button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#courses" role="tab" aria-controls="courses" aria-selected="false">Courses</b-button>
+					<b-button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#success" role="tab" aria-controls="success" aria-selected="false">Our Success</b-button>
+					<b-button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#about" role="tab" aria-controls="about" aria-selected="false">About Us</b-button>
+					<b-button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact Us</b-button> 
 				</div>
 				<div class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0" v-else-if="userType() === 'Student'">
-					<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-					<button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#download" type="button" role="tab" aria-controls="courses" aria-selected="false">Download</button>
-					<button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#exam" type="button" role="tab" aria-controls="success" aria-selected="false">Exam</button>
-					<button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#feedback" type="button" role="tab" aria-controls="about" aria-selected="false">Feedback</button>      
+					<b-button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" role="tab" aria-controls="home" aria-selected="true">Home</b-button>
+					<b-button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#download" role="tab" aria-controls="courses" aria-selected="false">Download</b-button>
+					<b-button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#exam" role="tab" aria-controls="success" aria-selected="false">Exam</b-button>
+					<b-button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#feedback" role="tab" aria-controls="about" aria-selected="false">Feedback</b-button>      
 				</div>
 				<div class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0" v-else-if="userType() === 'Teacher'">
-					<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-					<button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#download" type="button" role="tab" aria-controls="courses" aria-selected="false">Download</button>
-					<button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#exam" type="button" role="tab" aria-controls="success" aria-selected="false">Exam</button>   
+					<b-button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" role="tab" aria-controls="home" aria-selected="true">Home</b-button>
+					<b-button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#download" role="tab" aria-controls="courses" aria-selected="false">Download</b-button>
+					<b-button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#exam" role="tab" aria-controls="success" aria-selected="false">Exam</b-button>   
 				</div>
 				<div class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0" v-else-if="userType() === 'Admin'">
-					<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-					<button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#students" type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button>
-					<button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#teachers" type="button" role="tab" aria-controls="success" aria-selected="false">Teachers</button>
-					<button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#courses" type="button" role="tab" aria-controls="success" aria-selected="false">Courses</button>
-					<button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#site" type="button" role="tab" aria-controls="about" aria-selected="false">Site</button>      
+					<b-button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#home" role="tab" aria-controls="home" aria-selected="true">Home</b-button>
+					<b-button class="nav-link" id="pills-course-tab" data-bs-toggle="pill" data-bs-target="#students" role="tab" aria-controls="courses" aria-selected="false">Students</b-button>
+					<b-button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#teachers" role="tab" aria-controls="success" aria-selected="false">Teachers</b-button>
+					<b-button class="nav-link" id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#courses" role="tab" aria-controls="success" aria-selected="false">Courses</b-button>
+					<b-button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#site" role="tab" aria-controls="about" aria-selected="false">Site</b-button>      
 				</div>
 				<div class="col-md-3 text-end" v-if="isLoggedIn()">
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-outline-success mx-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
-					<button type="button" class="btn btn-success">Register</button>
+					<b-button variant="outline-primary mx-md-2" v-b-modal.loginForm ref="loginBtn">Login</b-button>
+					<b-button variant="success">Register</b-button>
 				</div>
 				<div class="col-md-3 text-end" v-else>
 					<h3 class="text-success">Welcome User!</h3>
@@ -56,12 +56,12 @@ export default {
 	],
 	methods: {
 		isLoggedIn(){
-			console.log(this.$route.path)
+			// console.log(this.$route.path)
 			return this.$route.path == '/'
 		},
 		userType() {
 			const name = this.$route.name
-			console.log(name)
+			// console.log(name)
 			if (name == 'Student')
 				return 'Student'
 			if (name == 'Teacher')
