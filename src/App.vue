@@ -22,6 +22,7 @@
 <style>
 #app {
 	overflow-x: hidden;
+	margin-top: 55px;
 }
 .sticky-top {
 	position: fixed; top: 0;
