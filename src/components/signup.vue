@@ -1,6 +1,7 @@
 <template>
 	<section>
 		<div class="container">
+      <div><h1></h1></div>
 			<h2>Add new Students</h2>
 			<form @submit.prevent="handleSubmit()" id="signupform">
 				<div class="form-group">

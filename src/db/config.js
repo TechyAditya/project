@@ -24,3 +24,61 @@ export let detachedAuth = authApp.auth();
 // export utils/refs
 export const db = firebase.firestore();
 export default firebase;
+
+// REMOVE THESE AFTER FINISHING PROJECT
+
+// firebase.auth().onAuthStateChanged((user) => {
+// 	const btn = document.getElementById('loginpg');
+// 	if (user) {
+// 		if (this.selected == '') {
+// 			firebase.auth().signOut().then()
+// 		}
+// 		else {
+// 			db.collection(role).doc(user.uid).get().then((doc) => {
+// 				if (doc.exists) {
+// 					if (role == 'students') {
+// 						window.open("assets/student.html", "_self")
+// 					} else if (role == 'teachers') {
+// 						window.open("assets/teacher.html", "_self")
+// 					} else if (role == 'admin') {
+// 						window.open("assets/admin.html", "_self")
+// 					}
+// 				} else {
+// 					btn.innerHTML = "Log in";
+// 					btn.disabled = false;
+// 					warn.style.display = "block";
+// 					warn.innerHTML = "You are not registered as a " + role;
+// 					firebase.auth().signOut().then();
+// 				}
+// 			})
+// 		}
+// 	}
+// })
+
+// const trigger = document.getElementById('loginbtn');
+// trigger.addEventListener('click', (e) => {
+// 	const btn = document.getElementById('loginpg');
+// 	e.preventDefault();
+// 	btn.addEventListener('click', (e) => {
+// 		e.preventDefault();
+// 		const form = document.getElementById('login');
+// 		const emaill = form.email.value;
+// 		const passwordd = form.password.value;
+// 		const warn = document.getElementById('warn');
+// 		console.log(emaill, passwordd, role);
+
+// 		btn.innerHTML = "Logging in...";
+// 		btn.disabled = true;
+// 		role = form.role.value;
+// 		console.log(emaill, passwordd, role);
+// 		firebase.auth().signInWithEmailAndPassword(emaill, passwordd)
+// 			.then(() => {
+// 			}).catch((error) => {
+// 				warn.style.display = "block";
+// 				warn.innerHTML = error.message;
+// 				console.log(error)
+// 				btn.innerHTML = "Log in";
+// 				btn.disabled = false;
+// 			});
+// 	})
+// });
