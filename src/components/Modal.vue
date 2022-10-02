@@ -18,14 +18,14 @@
 				<div id="warn" class="mt-3 text-danger" v-if="warnmsg"><strong>{{ warnmsg }}</strong></div>
 			</div>
 			<b-button id="loginpg" variant="success d-flex mx-auto mt-2" size="lg" type="button" @click="handleSubmit()"
-				data-bs-dismiss="modal">Login</b-button>
+				v-model="loginpg" :disabled=loginstate>{{ logintext }}</b-button>
 		</form>
 	</b-modal>
 </template>
 
 <script>
 import firebase from '../db/config';
-let db = firebase.firestore();
+let db = firebase.firestore(); 
 
 export default {
 	// computed: {
@@ -49,21 +49,32 @@ export default {
 			],
 			email: '',
 			password: '',
-			warnmsg: ''
+			warnmsg: '',
+			loginstate: false,
+			logintext: 'Login',
+			loginpg: false,
 		}
 	},
 	methods: {
 		handleSubmit() {
 			const router = this.$router;
 			const pathName = this.selected
-			firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+			
+			if(this.email && this.password && this.selected) {
+				this.loginstate = true;
+				this.logintext = 'Logging in...';
+				firebase.auth().signInWithEmailAndPassword(this.email, this.password)
 				.then((user) => {
 					console.log(pathName)
 					// print user uid
 					console.log(user.user.uid)
 					db.collection(pathName).doc(user.user.uid).get().then((doc) => {
+						this.loginstate = false;
+						this.logintext = 'Login';
+						this.warnmsg = '';
 						if (doc.exists) {
 							router.push({ path: `/${pathName}` })
+							document.querySelector('.btn-close').click()
 						}
 						else {
 							this.warnmsg = "You are not registered as a " + pathName
@@ -73,14 +84,16 @@ export default {
 				})
 				.catch((error) => {
 					this.warnmsg = error.message
+					this.loginstate = false;
+					this.logintext = 'Login';
 				})
+			}
 		}
 	}
 }
 
-
-
 </script>
 
 <style>
+
 </style>
