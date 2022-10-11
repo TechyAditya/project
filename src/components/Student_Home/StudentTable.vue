@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>{{ selected }}</p>
+    <button v-if="selected[0]" @click="testFun()">Delete</button>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -39,6 +40,7 @@
 <script>
 import firebase from '../../db/config';
 
+
 let storeStudent = []
 let db = firebase.firestore();
 export default {
@@ -66,6 +68,15 @@ export default {
     loadData() {
       this.getStudents();
     },
+    createStudents() { }
+    ,
+    deleteStudents() {
+      const deleteStudents = firebase.functions().httpsCallable('deleteStudents');
+      deleteStudents({ students: this.selected }).then(() => {
+        console.log("Function executed");
+        this.loadData();
+      })
+    },
     onRowSelected(selected, id) {
       console.log(storeStudent)
       if (!selected) {
@@ -73,16 +84,25 @@ export default {
       } else {
         this.selected = this.selected.filter(item => item !== id)
       }
+      console.log(this.selected)
       return !selected
     },
     showMarks(id) {
       storeStudent.forEach((student) => {
         if (student.id === id) {
           this.subjects = []
-          for (const [key, value] of Object.entries(student.subjects)) {
-            this.subjects.push({ subject: key, marks: value })
-          }
+          if (student.subjects) 
+            for (const [key, value] of Object.entries(student.subjects)) {
+              this.subjects.push({ subject: key, marks: value })
+            }
         }
+      })
+    },
+    testFun() {
+      const test = firebase.functions().httpsCallable('test');
+      test().then(response => {
+        console.log("Function executed");
+        console.log(response.data);
       })
     },
     display() {
