@@ -61,7 +61,7 @@ export default {
 			const pathName = this.selected
 			
 			if(this.email && this.password && this.selected) {
-				this.loginstate = true;
+				this.loginstate = true; 
 				this.logintext = 'Logging in...';
 				firebase.auth().signInWithEmailAndPassword(this.email, this.password)
 				.then((user) => {

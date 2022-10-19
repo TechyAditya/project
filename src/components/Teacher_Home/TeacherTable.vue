@@ -90,7 +90,7 @@ export default {
       storeStudent.forEach((student) => {
         if (student.id === id) {
           this.subjects = []
-          if (student.subjects) 
+          if (student.subjects)
             for (const [key, value] of Object.entries(student.subjects)) {
               this.subjects.push({ subject: key, marks: value })
             }

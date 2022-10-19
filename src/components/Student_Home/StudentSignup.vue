@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="input-group-1" label="Authentication:" label-for="input-1">
+      <b-form-group id="input-group-1" label="Create Student:" label-for="input-1">
         <b-form-input id="input-1" v-model="form.email" type="email" placeholder="Enter email" required></b-form-input>
         <b-form-input id="input-6" v-model="form.pwd" type="password" placeholder="Enter password" required>
         </b-form-input>
@@ -86,7 +86,7 @@ export default {
       this.form.classno = ''
       this.form.batch = ''
       this.form.pwd = ''
-      
+
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {

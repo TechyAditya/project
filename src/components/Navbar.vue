@@ -72,7 +72,7 @@
 						<b-button variant="success">Register</b-button>
 					</div>
 					<div class="col-md-3 text-end" v-else>
-						<h3 class="text-success">Welcome {{ name }}!</h3>
+						<h3 class="text-success">Welcome {{ username }}!</h3>
 					</div>
 				</div>
 			</div>
@@ -83,12 +83,24 @@
 <script>
 import firebase from '../db/config.js'
 import db from '../db/config.js'
+
+function retName(uid) {
+	return db.collection('admin').doc(uid).get().then((user) => {
+		console.log(user.data().name)
+		return user.data().name
+	})
+}
+
 export default {
 	data() {
+		this.getName()
 		return {
-			name: 'User'
+			username: 'User'
 		}
 	},
+	props: [
+		"name"
+	],
 	methods: {
 		isLoggedIn() {
 			// console.log(this.$route.path)
@@ -105,17 +117,23 @@ export default {
 				return 'Admin'
 		},
 		getName() {
-			const uid = firebase.auth().currentUser.uid
-			console.log(uid)
-			db.collection('admin').doc(uid).get().then((user) => {
-				console.log(user.data().name)
-				this.name = user.data().name
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user) {
+					console.log('user is signed in')
+					// this.username = user.displayName
+					console.log(user.uid)
+					this.username = retName(user.uid)
+				} else {
+					console.log('user is not signed in')
+				}
 			})
+			// console.log(uid)
+			// return db.collection('admin').doc(uid).get().then((user) => {
+			// 	console.log(user.data().name)
+			// 	return user.data().name
+			// })
 		}
-	},
-	beforeMount() {
-		// this.getName()
-	},
+	}
 }
 </script>
 
