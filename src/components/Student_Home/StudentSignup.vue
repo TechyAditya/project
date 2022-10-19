@@ -71,7 +71,7 @@ export default {
             classno: classno
           }).then(() => {
             console.log('user created');
-            onReset(event);
+            this.onReset(event);
           }).catch((err) => {
             console.log(err);
           })  
@@ -79,6 +79,7 @@ export default {
     },
     onReset(event) {
       event.preventDefault()
+      document.querySelector('#refresh').click()
       // Reset our form values
       this.form.email = ''
       this.form.name = ''

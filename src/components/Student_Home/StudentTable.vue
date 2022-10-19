@@ -2,6 +2,7 @@
   <div>
     <p>{{ selected }}</p>
     <b-button v-if="selected[0]" variant="danger" @click="deleteStudents()">Delete</b-button>
+    <b-button id="refresh" @click="loadData()">Refresh Data</b-button>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -40,9 +41,15 @@
 <script>
 import firebase from '../../db/config';
 
-
 let storeStudent = []
 let db = firebase.firestore();
+
+function remove_duplicates_es6(arr) {
+    let s = new Set(arr);
+    let it = s.values();
+    return Array.from(it);
+}
+
 export default {
   data() {
     return {
@@ -66,10 +73,15 @@ export default {
       })
     },
     loadData() {
+      this.student=[]
+      storeStudent=[]
+      this.selected=[]
       this.getStudents();
     },
     deleteStudents() {
       const deleteUserData = firebase.functions().httpsCallable('deleteUserData');
+      this.selected = remove_duplicates_es6(this.selected);
+      console.log(this.selected)
       deleteUserData({ uid: this.selected, role: 'student' }).then((response) => {
         console.log("Function executed");
         console.log(response);

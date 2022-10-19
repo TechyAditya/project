@@ -65,7 +65,7 @@ export default {
 				this.logintext = 'Logging in...';
 				firebase.auth().signInWithEmailAndPassword(this.email, this.password)
 				.then((user) => {
-					console.log(pathName)
+					// console.log(pathName)data
 					// print user uid
 					console.log(user.user.uid)
 					db.collection(pathName).doc(user.user.uid).get().then((doc) => {
