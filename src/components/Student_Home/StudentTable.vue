@@ -43,6 +43,7 @@ import firebase from '../../db/config';
 
 let storeStudent = []
 let db = firebase.firestore();
+firebase.functions().useEmulator("localhost", 5000);
 
 function remove_duplicates_es6(arr) {
     let s = new Set(arr);
@@ -71,6 +72,10 @@ export default {
         this.student = storeStudent
         console.log(storeStudent)
       })
+      const call = firebase.functions().httpsCallable('test');
+      call({}).then((result) => {
+        console.log(result.data);
+      });
     },
     loadData() {
       this.student=[]
@@ -81,8 +86,8 @@ export default {
     deleteStudents() {
       const deleteUserData = firebase.functions().httpsCallable('deleteUserData');
       this.selected = remove_duplicates_es6(this.selected);
-      console.log(this.selected)
-      deleteUserData({ uid: this.selected, role: 'student' }).then((response) => {
+      console.log([...this.selected])
+      deleteUserData({ uid: [...this.selected], role: 'student' }).then((response) => {
         console.log("Function executed");
         console.log(response);
         this.loadData();
@@ -95,7 +100,7 @@ export default {
       } else {
         this.selected = this.selected.filter(item => item !== id)
       }
-      console.log(this.selected)
+      console.log([...this.selected])
       return !selected
     },
     showMarks(id) {

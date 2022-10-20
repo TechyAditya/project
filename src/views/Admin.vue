@@ -1,21 +1,25 @@
 <template>
     <main role="main" id="content" class="tab-content mb-md-5" style="min-height: 85vh;">
-		<div id="home" class="tab-pane fade show active tab-content" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-			<Home />
-		</div>
-		<div id="students" class="tab-pane fade tab-content" role="tabpanel" aria-labelledby="pills-courses-tab" tabindex="0">
-			<Students />
-		</div>
-		<div id="teachers" class="tab-pane fade tab-content" role="tabpanel" aria-labelledby="pills-success-tab" tabindex="0">
+        <div id="home" class="tab-pane fade show active tab-content" role="tabpanel" aria-labelledby="pills-home-tab"
+            tabindex="0">
+            <Home />
+        </div>
+        <div id="students" class="tab-pane fade tab-content" role="tabpanel" aria-labelledby="pills-courses-tab"
+            tabindex="0">
+            <Students />
+        </div>
+        <div id="teachers" class="tab-pane fade tab-content" role="tabpanel" aria-labelledby="pills-success-tab"
+            tabindex="0">
             <Teachers />
-		</div>
-        <div id="courses" class="tab-pane fade tab-content" role="tabpanel" aria-labelledby="pills-about-tab" tabindex="0">
+        </div>
+        <div id="courses" class="tab-pane fade tab-content" role="tabpanel" aria-labelledby="pills-about-tab"
+            tabindex="0">
             <Courses />
-		</div>
+        </div>
         <div id="site" class="tab-pane fade tab-content" role="tabpanel" aria-labelledby="pills-about-tab" tabindex="0">
             <Site />
-		</div>
-	</main>
+        </div>
+    </main>
 </template>
 
 <script>
@@ -24,13 +28,31 @@ import Teachers from '../composable/admin/Teachers.vue'
 import Courses from '../composable/admin/Courses.vue'
 import Site from '../composable/admin/Site.vue'
 import Students from '../composable/admin/Students.vue'
+import firebase from '../db/config'
 export default {
-    components: { 
-        Home, 
-        Teachers, 
-        Courses, 
-        Site, 
-        Students 
+    created() {
+        console.log("Admin")
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                // route to homepage
+                window.location = "/"
+            }
+            else {
+                firebase.firestore().collection('admin').doc(`${user.uid}`).get().then((doc) => {
+                    if (!doc.exists) { window.location = "/" }
+                    else {
+                        console.log(doc.data())
+                    }
+                })
+            }
+        })
+    },
+    components: {
+        Home,
+        Teachers,
+        Courses,
+        Site,
+        Students
     }
 }
 </script>

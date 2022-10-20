@@ -83,19 +83,23 @@
 <script>
 import firebase from '../db/config.js'
 import db from '../db/config.js'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 
-function retName(uid) {
-	return db.collection('admin').doc(uid).get().then((user) => {
-		console.log(user.data().name)
-		return user.data().name
+function retName(uid, scope) {
+	firebase.firestore().collection('admin').doc(uid).get().then((user) => {
+		console.log(user.data())
+		scope.username = user.data().name
 	})
 }
 
+const username = 'User'
+
+
 export default {
 	data() {
-		this.getName()
 		return {
-			username: 'User'
+			username: ref('User'),
 		}
 	},
 	props: [
@@ -103,6 +107,7 @@ export default {
 	],
 	methods: {
 		isLoggedIn() {
+			this.getName()
 			// console.log(this.$route.path)
 			return this.$route.path == '/'
 		},
@@ -117,12 +122,13 @@ export default {
 				return 'Admin'
 		},
 		getName() {
-			firebase.auth().onAuthStateChanged(function (user) {
+			const scope = this
+			firebase.auth().onAuthStateChanged(async (user) => {
 				if (user) {
 					console.log('user is signed in')
-					// this.username = user.displayName
-					console.log(user.uid)
-					this.username = retName(user.uid)
+					// console.log(user.uid)
+					// access username from data()
+					retName(user.uid, scope)
 				} else {
 					console.log('user is not signed in')
 				}
@@ -134,6 +140,46 @@ export default {
 			// })
 		}
 	}
+	// setup() {
+	// 	const username = ref('')
+	// 	const route = useRoute()
+	// 	const routeName = route.name
+	// 	const isLoggedIn = () => {
+	// 		// console.log(this.$route.path)
+	// 		return routeName === 'Welcome'
+	// 	}
+	// 	const userType = () => {
+	// 		if (routeName == 'Student')
+	// 			return 'Student'
+	// 		if (routeName == 'Teacher')
+	// 			return 'Teacher'
+	// 		if (routeName == 'Admin')
+	// 			return 'Admin'
+	// 	}
+	// 	const getName = () => {
+	// 		firebase.auth().onAuthStateChanged((user) => {
+	// 			if (user) {
+	// 				console.log('user is signed in')
+	// 				// this.username = user.displayName
+	// 				console.log(user.uid)
+	// 				username.value = user.uid
+	// 				console.log(username)
+	// 			} else {
+	// 				console.log('user is not signed in')
+					
+	// 			}
+	// 		})
+	// 		// console.log(uid)
+	// 		// return db.collection('admin').doc(uid).get().then((user) => {
+	// 		// 	console.log(user.data().name)
+	// 		// 	return user.data().name
+	// 		// })
+	// 	}
+
+	// 	return { 
+	// 		username, isLoggedIn, userType, getName
+	// 	}
+	// }
 }
 </script>
 
