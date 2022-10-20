@@ -1,7 +1,8 @@
 <template>
   <div>
     <p>{{ selected }}</p>
-    <b-button v-if="selected[0]" variant="danger" @click="deleteStudents()">Delete</b-button>
+    <b-button v-if="selected[0]" variant="danger" @click="deleteTeachers()">Delete</b-button>
+    <b-button id="refresh" @click="loadData()">Refresh Data</b-button>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -40,9 +41,16 @@
 <script>
 import firebase from '../../db/config';
 
-
 let storeStudent = []
 let db = firebase.firestore();
+firebase.functions().useEmulator("localhost", 5000);
+
+function remove_duplicates_es6(arr) {
+    let s = new Set(arr);
+    let it = s.values();
+    return Array.from(it);
+}
+
 export default {
   data() {
     return {
@@ -64,13 +72,22 @@ export default {
         this.student = storeStudent
         console.log(storeStudent)
       })
+      const call = firebase.functions().httpsCallable('test');
+      call({}).then((result) => {
+        console.log(result.data);
+      });
     },
     loadData() {
+      this.student=[]
+      storeStudent=[]
+      this.selected=[]
       this.getStudents();
     },
     deleteStudents() {
       const deleteUserData = firebase.functions().httpsCallable('deleteUserData');
-      deleteUserData({ uid: this.selected, role: 'student' }).then((response) => {
+      this.selected = remove_duplicates_es6(this.selected);
+      console.log([...this.selected])
+      deleteUserData({ uid: [...this.selected], role: 'student' }).then((response) => {
         console.log("Function executed");
         console.log(response);
         this.loadData();
@@ -83,14 +100,14 @@ export default {
       } else {
         this.selected = this.selected.filter(item => item !== id)
       }
-      console.log(this.selected)
+      console.log([...this.selected])
       return !selected
     },
     showMarks(id) {
       storeStudent.forEach((student) => {
         if (student.id === id) {
           this.subjects = []
-          if (student.subjects)
+          if (student.subjects) 
             for (const [key, value] of Object.entries(student.subjects)) {
               this.subjects.push({ subject: key, marks: value })
             }

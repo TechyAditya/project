@@ -34,6 +34,19 @@
       </tbody>
     </table>
     <p>{{ subjects }}</p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Subjects</th>
+          <th scope="col">Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="marks in subjects" :key="person.id">
+          <th scope="row"></th>
+        </tr>
+      </tbody>
+    </table>
     <b-table :items="subjects"></b-table>
     <b-button v-if="subjects" @click="subjects=false">Clear</b-button>
   </div>
@@ -46,16 +59,15 @@ let db = firebase.firestore();
 firebase.functions().useEmulator("localhost", 5000);
 
 function remove_duplicates_es6(arr) {
-    let s = new Set(arr);
-    let it = s.values();
-    return Array.from(it);
+  let s = new Set(arr);
+  let it = s.values();
+  return Array.from(it);
 }
 
 export default {
   data() {
     return {
       modes: ['multi'],
-      fields: ['select', 'name', 'class', 'batch', 'show_marks'],
       student: storeStudent,
       selectMode: 'multi',
       selected: [],
@@ -78,9 +90,9 @@ export default {
       });
     },
     loadData() {
-      this.student=[]
-      storeStudent=[]
-      this.selected=[]
+      this.student = []
+      storeStudent = []
+      this.selected = []
       this.getStudents();
     },
     deleteStudents() {
@@ -107,7 +119,7 @@ export default {
       storeStudent.forEach((student) => {
         if (student.id === id) {
           this.subjects = []
-          if (student.subjects) 
+          if (student.subjects)
             for (const [key, value] of Object.entries(student.subjects)) {
               this.subjects.push({ subject: key, marks: value })
             }

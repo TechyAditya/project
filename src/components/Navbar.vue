@@ -88,13 +88,11 @@ import { useRoute } from 'vue-router'
 
 function retName(uid, scope) {
 	firebase.firestore().collection('admin').doc(uid).get().then((user) => {
-		console.log(user.data())
 		scope.username = user.data().name
 	})
 }
 
 const username = 'User'
-
 
 export default {
 	data() {
@@ -123,21 +121,14 @@ export default {
 		},
 		getName() {
 			const scope = this
-			firebase.auth().onAuthStateChanged(async (user) => {
+			firebase.auth().onAuthStateChanged((user) => {
 				if (user) {
 					console.log('user is signed in')
-					// console.log(user.uid)
-					// access username from data()
 					retName(user.uid, scope)
 				} else {
 					console.log('user is not signed in')
 				}
 			})
-			// console.log(uid)
-			// return db.collection('admin').doc(uid).get().then((user) => {
-			// 	console.log(user.data().name)
-			// 	return user.data().name
-			// })
 		}
 	}
 	// setup() {
